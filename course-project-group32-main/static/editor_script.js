@@ -533,6 +533,10 @@ function selectTransition(action) {
     if (action == 'None') {
         resetTransitions();
     }
+    else if(action=='Fade')
+    {
+        transitionType='';
+    }
     else if (action == 'Slide') {
         transitionType = "Slide--up";
         var slideDirection = document.getElementById('slideSelect');
@@ -543,7 +547,7 @@ function selectTransition(action) {
             console.log(selectedOption);
             transitionType = action + "--" + selectedOption;
             console.log(action);
-            transitionType = action;
+            // transitionType = action;
             // You can perform further actions here based on the selected option
             slideDirection.style.display = 'none';
         });
