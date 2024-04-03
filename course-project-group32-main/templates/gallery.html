@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        .favicon {
+          border-radius: 10px;
+        }
+      </style>
+      <link rel="icon" type="image/jpeg" href="/static/icons/ISIS logo.jpeg" class="favicon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/gallery.css">
+    <title>Gallery</title>
+</head>
+<body>
+    <div id="sidebar">
+        <div class="sidenav">
+            <div class="sidenav_element" id="upload_gallery" onclick="location.href = '/upload'">
+                Upload
+            </div>
+            <div class="sidenav_element" id="select_gallery" onclick="startSelectMode()">
+                Select
+            </div>
+            <div class="sidenav_element" id="delete_gallery" onclick="deleteSelected()">
+                Delete
+            </div>
+            <div class="sidenav_element" id="download_gallery">
+                Download
+            </div>
+            <div class="sidenav_element" id="make_gallery" onclick="makeVideo()">
+                Create Video
+            </div>
+            <div class="sidenav_element" id="log_out_gallery" onclick="logout()">
+                Log Out
+            </div>
+        </div>
+    </div>
+    <div id="user_details">
+        {{username}}
+    </div>
+    <div class="gallery">
+        {%for image_data in image_list%}
+        <img src="data:{{image_data[1]}};base64,{{image_data[2]}}" loading="lazy" class="gallery_item_image" id="{{image_data[0]}}">
+        {%endfor%}
+    </div>
+    <div id="context_menu">
+        <div id="select_context_menu">
+            Select
+        </div>
+        <div id="delete_context_menu">
+            Delete
+        </div>
+        <div id="download_context_menu">
+            Download
+        </div>
+    </div>
+</body>
+<script src="/static/gallery.js"></script>
+</html>

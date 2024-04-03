@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photos to Video converter</title>
+    <link rel="stylesheet" href="editor_styles.css">
+</head>
+
+<body>
+
+    <nav class="nav_flex">
+        <button class="nav_btn" id="Home_btn" onclick="location.href = './../index.html'">Home</button>
+        <button class="nav_btn" id="File_btn" onclick="toggleFileMenu()">File</button>
+        <div class="nav_menu" id="file_menu">
+            <a style="text-decoration: none;">Open</a>
+            <a style="text-decoration: none;">Save</a>
+        </div>
+
+        <button class="nav_btn" id="Import_btn" onclick="toggleImportMenu()">Import</button>
+        <div class="nav_menu" id="import_menu">
+            <a style="text-decoration: none;" onclick="location
+            .href='./../Upload/index.html';">Photos</a>
+            <!-- <a style="text-decoration: none;">Videos</a> -->
+            <a style="text-decoration: none;">Audio</a>
+            <a style="text-decoration: none;">Transitions</a>
+        </div>
+        <button class="nav_btn" id="View_btn" onclick="toggleViewMenu()">View</button>
+        <div class="nav_menu" id="view_menu">
+            <a id = "maximize_button" style="text-decoration: none;" onclick="toggleFullscreen()">Fullscreen</a>
+            <!-- <a style="text-decoration: none;">Minimize</a> -->
+            <a id = "dark_mode" style="text-decoration: none;" onclick="toggle_Darkmode()">Dark Mode</a>
+            <hr>
+            <a style="text-decoration: none;" onclick="toggle_sidebar()">Sidebar</a>
+            <a style="text-decoration: none;" onclick="toggle_timeline()">Timeline</a>
+        </div>
+
+        <button class="nav_btn" id="Export_btn" onclick="toggleExportMenu()">Export</button>
+        <div class="nav_menu" id="export_menu">
+            <a style="text-decoration: none;">Export settings</a>
+            <a style="text-decoration: none;">Export</a>
+        </div>
+
+        <button class="nav_btn" id="Help_btn" onclick="toggleHelpMenu()">Help</button>
+        <div class="nav_menu" id="help_menu">
+            <input type="text" placeholder="Search">
+            <hr>
+            <a style="text-decoration: none;">FAQ</a>
+        </div>
+
+        <div class="auto_btn" id="Upload_btn" onclick="">
+            <img src="./icons/plus.svg" alt="Plus">
+            Smart Upload
+        </div>
+        <button class="Profile_btn" id="Profile_btn" onclick="toggleProfileMenu()"><img src=""></button>
+        <div class="nav_menu" id="profile_menu">
+
+        </div>
+
+    </nav>
+
+    <hr style="width: 100%;">
+
+    <div id="main_viewport" class="main_flex">
+        <div id="sidebar" class="sidebar_flex">
+            <button id="Media_btn" class="sidebar_btn" onclick="media_toggle()">Media</button>
+            <div id="media_content" class="media_flex" ondrop="handleDrop(event)" ondragover="handleDragOver(event)">
+                Photos and video go here
+            </div>
+
+            <button id="Transitions_btn" class="sidebar_btn" onclick="transition_toggle()">Transitions</button>
+            <div id="transition_content" class="transition_flex" ondrop="handleDrop(event)" ondragover="handleDragOver(event)">
+                Transitions go here
+            </div>
+
+            <button id="Music_btn" class="sidebar_btn" onclick="music_toggle()">Music</button>
+            <div id="music_content" class="music_flex" ondrop="handleDrop(event)" ondragover="handleDragOver(event)">
+                Music goes here
+                <!-- <a></a> -->
+            </div>
+        </div>
+        
+        <div id="video_and_timeline">
+            <div id="video">
+                <video id="current_vid" controls>
+                    <source src="./vid/x2mate.com-2020 LG OLED l The Black 4K HDR 60fps-(1080p60 HDR).mp4"
+                        type="video/mp4">
+                    Your browser does not support HTML video.
+                </video>
+            </div>
+            <hr>
+            <div id="controls" class="controls">
+                <img class="control_icons" src="./icons/airplay.svg" id="airplay" onclick="airplay()">
+                <div class="center-group">
+                    <img class="control_icons" src="./icons/rewind.svg" id="rewind" onclick="rewind()">
+                    <img class="control_icons" src="./icons/skip-back.svg" id="skip_back" onclick="skip_back()">
+                    <img class="control_icons" src="./icons/play.svg" id="play_pause" onclick="play_pause()">
+                    <img class="control_icons" src="./icons/skip-forward.svg" id="skip_forward" onclick="skip_forward()">
+                    <img class="control_icons" src="./icons/fast-forward.svg" id="fast_forward" onclick="fast_forward()">
+                    <img class="control_icons" src="./icons/repeat.svg" id="repeat" onclick="repeat()">
+                </div>
+                <img class="control_icons" src="./icons/maximize.svg" id="maximize" onclick="maximize()">
+            </div>
+            
+
+            <hr>
+
+            <div id="timeline">
+                <img src="./img/timeline .webp">
+            </div>
+        </div>
+    </div>
+    <script src="editor_script.js"></script>
+</body>
+
+</html>

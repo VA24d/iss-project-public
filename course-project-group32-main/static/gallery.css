@@ -1,0 +1,274 @@
+body
+{
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgb(224, 224, 224);
+    z-index: 0;
+    overflow-x: hidden;
+    color: black;
+}
+
+#sidebar
+{
+    /* gap: 0; */
+    background-color: rgb(219, 219, 219);
+    display:flex;
+    width: 20vw;
+    margin: 0;
+    top: 0;
+    left: 0;
+    height: 100%;
+    position: fixed;
+    overflow-x: hidden;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidenav
+{
+    display: flex;
+    width: 20vw;
+    background-color: rgb(219, 219, 219);
+    position: fixed;
+    z-index: 0;
+    /* top: 0;
+    left: 0; */
+    /* height: 90vw; */
+    overflow-x: hidden;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0;
+    height: fit-content;
+}
+
+.sidenav_element
+{
+    height: fit-content;
+    min-height: 50px;
+    width: 100%;
+    border-radius: 20px;
+    font-size: 30px;
+    align-items: center;
+    text-align: left;
+    text-indent: 20px;
+}
+
+#select_gallery:hover
+{
+    background-color: rgb(202, 202, 202);
+}
+
+#upload_gallery:hover
+{
+    background-color: rgb(202, 202, 202);
+}
+
+#log_out_gallery:hover
+{
+    background-color: rgb(202, 202, 202);
+}
+
+
+.select_mode #select_gallery
+{
+    background-color: rgb(143, 143, 192);
+}
+
+.select_mode #select_gallery:hover
+{
+    background-color: rgb(115, 115, 173);
+}
+
+.select_mode #upload_gallery
+{
+    color: rgb(118, 118, 118);
+}
+
+.select_mode #upload_gallery:hover
+{
+    color: rgb(118, 118, 118);
+    background-color: rgb(219, 219, 219);
+}
+
+#delete_gallery
+{
+    color: rgb(118, 118, 118);
+    background-color: rgb(219, 219, 219);
+}
+
+.select_valid #delete_gallery
+{
+    background-color: rgb(219, 219, 219);
+    color: black;
+}
+
+.select_valid #delete_gallery:hover
+{
+    background-color: rgb(202, 202, 202);
+}
+
+#download_gallery
+{
+    color: rgb(118, 118, 118);
+    background-color: rgb(219, 219, 219);
+}
+
+.select_valid #download_gallery
+{
+    background-color: rgb(219, 219, 219);
+    color: black;
+}
+
+.select_valid #download_gallery:hover
+{
+    background-color: rgb(202, 202, 202);
+}
+
+#make_gallery
+{
+    color: rgb(118, 118, 118);
+    background-color: rgb(219, 219, 219);
+}
+
+.select_valid #make_gallery
+{
+    background-color: rgb(219, 219, 219);
+    color: black;
+}
+
+.select_valid #make_gallery:hover
+{
+    background-color: rgb(202, 202, 202);
+}
+
+#user_details
+{
+    display: block;
+    height: fit-content;
+    width: 20vw;
+    height: fit-content;
+    margin: 0;
+    text-align: left;
+    text-indent: 20px;
+    font-size: 30px;
+    left: 0;
+    bottom: 2vh;
+    z-index: 1;
+    position: fixed;
+}
+
+/* .gallery
+{
+    top: 0;
+    left: 20%;
+    padding: 0;
+    margin-left: 20vw;
+    margin-top: 0;
+    margin-right: 0;
+    display: grid;
+    width: 80vw;
+    background-color: rgb(224, 224, 224);
+    border-style: hidden;
+    grid-auto-flow: row;
+    grid-auto-rows: 20vh;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    justify-content: space-evenly;
+} */
+
+.gallery{
+    z-index: 1;
+    top: 0;     
+    left: 20%;
+    padding: 0;
+    margin-left: 20vw;
+    margin-top: 0;
+    margin-right: 0;
+    display: flex;
+    width: 80vw;
+    background-color: rgb(224, 224, 224);
+    border-style: hidden;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 0;
+}
+
+@keyframes expand{
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.05);
+    }
+}
+
+.gallery_item_image
+{
+    margin: 1%;
+    border-radius: 20px;
+    display: block;
+    height: 15vw;
+    width: auto;
+    max-width: 75vw;
+    z-index: 2;
+}
+
+.gallery_item_image.selected
+{
+    border-style: solid;
+    border-color: blue;
+    border-width: 8px;
+    transform: scale(1.05);
+}
+
+.gallery_item_image:hover:not(.selected)
+{
+    /* transform: scale(1.05); */
+    z-index: 2;
+    animation: expand 0.3s ease forwards;
+    filter: brightness(80%);
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+
+
+
+#context_menu
+{
+    width: 200px;
+    height: fit-content;
+    border-radius: 20px;
+    display: none;
+    background-color: rgb(201, 162, 162);
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    top: 400px;
+    left: 400px;
+    position: absolute;
+    z-index: 3; 
+}
+
+#context_menu > div
+{
+    width: 100%;
+    height: 30px;
+    border-radius: 20px;
+    font-size: 25px;
+    text-align: left;
+    text-indent: 10px;
+    margin-top: 0;
+    margin-bottom: 0;
+    background-color: rgb(201, 162, 162);
+    z-index: 3;
+}
+
+#context_menu > div:hover
+{
+    filter: brightness(80%);
+    z-index: 3;
+}
+

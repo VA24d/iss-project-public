@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Timeline with Two Sliders</title>
+<style>
+    /* Add your existing CSS styles here */
+
+.timeline-scrollable {
+    position: relative; /* Ensure relative positioning for the indicator */
+    overflow-x: auto;
+    width: 100%;
+    padding-bottom: 20px; /* Add padding to make space for the sliders */
+}
+
+.timeline-scrollable::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px; /* Adjust the width of the indicator */
+    background-color: red; /* Adjust the color of the indicator */
+    z-index: 2; /* Ensure the indicator appears above the timeline content */
+}
+
+.image-slider {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 10px;
+    background-color: #ccc;
+    border-radius: 5px;
+    -webkit-appearance: none;
+    appearance: none;
+    z-index: 1; /* Ensure the slider appears above the timeline content */
+}
+
+.video-slider {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 10px;
+    background-color: #ccc;
+    border-radius: 5px;
+    -webkit-appearance: none;
+    appearance: none;
+    z-index: 1; /* Ensure the slider appears above the timeline content */
+}
+
+.image-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background-color: #007bff;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+}
+
+.image-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background-color: #007bff;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+}
+
+.video-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background-color: #ff0000; /* Adjust the color for video slider */
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+}
+
+.video-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background-color: #ff0000; /* Adjust the color for video slider */
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+}
+
+</style>
+</head>
+<body>
+
+<div id="timeline" class="timeline">
+    <div class="timeline-scrollable">
+        <div id="visual" class="timeline-visual">
+            <!-- Timeline events will go here -->
+            <div class="timeline-event">
+                <div class="OImg">
+                    <img src="/static/img/t50_revs.jpeg" alt="Timeline Image">
+                    <p class="img_caption">Cat</p>
+                    <button class="img_btn" onclick="delete_img()"><img src="./../static/icons/trash-2.svg"
+                            alt="delete"></button>
+                    <button class="img_btn" onclick="move_left()"><img src="./../static/icons/chevron-right.svg"
+                            class="rotate" alt="left"></button>
+                </div>
+            </div>
+            <!-- Add more timeline events as needed -->
+        </div>
+        <input type="range" min="0" max="100" value="50" class="image-slider" id="imageRange">
+    </div>
+
+    <div class="timeline-scrollable">
+        <div id="tracks" class="timeline-tracks">
+            <div id="TrackIntro">
+                <!-- Track introduction or header goes here -->
+            </div>
+            <div>
+                <div id="tempTrack" class="track">
+                    <div>
+                        <!-- Track content goes here -->
+                    </div>
+                    <div>
+                        <!-- Additional track content goes here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input type="range" min="0" max="100" value="50" class="video-slider" id="videoRange">
+    </div>
+</div>
+
+</body>
+</html>

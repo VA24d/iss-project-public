@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="gallery.css">
+    <title>Gallery</title>
+</head>
+<body>
+    <div id="sidebar">
+        <div class="sidenav">
+            <div class="sidenav_element" id="upload_gallery" onclick="location.href = './../Upload/index.html'">
+                Upload
+            </div>
+            <div class="sidenav_element" id="select_gallery" onclick="startSelectMode()">
+                Select
+            </div>
+            <div class="sidenav_element" id="delete_gallery">
+                Delete
+            </div>
+            <div class="sidenav_element" id="download_gallery">
+                Download
+            </div>
+            <div class="sidenav_element" id="make_gallery" onclick="location.href = './../editor/p2v.html'">
+                Create Video
+            </div>
+            <div class="sidenav_element" id="log_out_gallery">
+                Log Out
+            </div>
+        </div>
+    </div>
+    <div id="user_details">
+        Username
+    </div>
+    <div class="gallery">
+        <img src="cropped-1920-1080-641975.jpg" loading="lazy" class="gallery_item_image">
+        <img src="cropped-1920-1080-641975.jpg" loading="lazy" class="gallery_item_image">
+        <img src="dfz5iyx-0dd535fd-8aa0-49d3-b2bc-20380141f792.jpg" loading="lazy" class="gallery_item_image">
+        <img src="dfz5iyx-0dd535fd-8aa0-49d3-b2bc-20380141f792.jpg" loading="lazy" class="gallery_item_image">
+        <img src="cropped-1920-1080-641975.jpg" loading="lazy" class="gallery_item_image">
+
+        <img src="dfz5iyx-0dd535fd-8aa0-49d3-b2bc-20380141f792.jpg" loading="lazy" class="gallery_item_image">
+
+        <img src="dfz5iyx-0dd535fd-8aa0-49d3-b2bc-20380141f792.jpg" loading="lazy" class="gallery_item_image">
+        <img src="panorama1.jpeg" loading="lazy" class="gallery_item_image">
+        <img src="dfz5iyx-0dd535fd-8aa0-49d3-b2bc-20380141f792.jpg" loading="lazy" class="gallery_item_image">
+        <img src="cropped-1920-1080-641975.jpg" loading="lazy" class="gallery_item_image">
+
+        <img src="dfz5iyx-0dd535fd-8aa0-49d3-b2bc-20380141f792.jpg" loading="lazy" class="gallery_item_image">
+    </div>
+    <div id="context_menu">
+        <div id="select_context_menu">
+            Select
+        </div>
+        <div id="delete_context_menu">
+            Delete
+        </div>
+        <div id="download_context_menu">
+            Download
+        </div>
+    </div>
+</body>
+<script src="custom_context_menu.js"></script>
+</html>

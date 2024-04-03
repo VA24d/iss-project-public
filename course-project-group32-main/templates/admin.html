@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        .favicon {
+          border-radius: 10px;
+        }
+      </style>
+      <link rel="icon" type="image/jpeg" href="/static/icons/ISIS logo.jpeg" class="favicon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Data</title>
+    <style>
+        body {
+            background-color: rgb(6, 22, 38);
+            color: white;
+            font-family: Verdana, sans-serif;
+        }
+
+        @keyframes fadeInAnimation {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* custom_styles */
+        /*platform*/
+        .standard_logo {
+            font-style: italic;
+            text-align: left;
+            font-size: 35px;
+            padding: auto;
+            animation: fadeInAnimation ease 1s;
+        }
+
+        table.blueTable {
+            border: 1px solid #1C6EA4;
+            background-color: #EEEEEE;
+            width: 100%;
+            text-align: left;
+            border-collapse: collapse;
+            /* border-radius: 40px; */
+
+            background-color: white;
+            color: rgb(6, 22, 38);
+            text-align: center;
+            align-content: center;
+            justify-content: center;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: auto;
+            margin-top: auto;
+            margin: auto;
+            width: 23%;
+            padding: 15px;
+            font-size: 105px;
+            /* border-radius: 60px; */
+
+            animation: fadeInAnimation ease 3s;
+            animation-iteration-count: 1;
+        }
+
+        table.blueTable td,
+        table.blueTable th {
+            border: 1px solid #AAAAAA;
+            padding: 3px 2px;
+        }
+
+        table.blueTable tbody td {
+            font-size: 13px;
+        }
+
+        table.blueTable thead {
+            background: #1C6EA4;
+            background: -moz-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+            background: -webkit-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+            background: linear-gradient(to bottom, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+            border-bottom: 2px solid #444444;
+        }
+
+        table.blueTable thead th {
+            font-size: 15px;
+            font-weight: bold;
+            color: #FFFFFF;
+            border-left: 2px solid #D0E4F5;
+        }
+
+        table.blueTable thead th:first-child {
+            border-left: none;
+        }
+
+        table.blueTable tfoot {
+            font-size: 14px;
+            font-weight: bold;
+            color: #FFFFFF;
+            background: #D0E4F5;
+            background: -moz-linear-gradient(top, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
+            background: -webkit-linear-gradient(top, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
+            background: linear-gradient(to bottom, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
+            border-top: 2px solid #444444;
+        }
+
+        table.blueTable tfoot td {
+            font-size: 14px;
+        }
+
+        table.blueTable tfoot .links {
+            text-align: right;
+        }
+
+        table.blueTable tfoot .links a {
+            display: inline-block;
+            background: #1C6EA4;
+            color: #FFFFFF;
+            padding: 2px 8px;
+            border-radius: 5px;
+        }
+
+        .logout-btn {
+            width: auto;
+            justify-content: center;
+            align-items: center;
+            align-self: center;
+            display: block;
+            width: 100%;
+            background-color: cadetblue;
+            color: white;
+            border: none;
+            border-radius: 40px;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 20px;
+            transition: background-color 0.3s ease;
+
+            animation: fadeInAnimation ease 3s;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <p class="standard_logo">
+        VA
+    </p>
+
+    <table class="blueTable">
+        <p style="align-self: center; text-align: center;">
+            Admin Page
+        </p>
+        <thead>
+            <tr>
+                <th>UUID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Hashed Password</th>
+                <th>Admin</th>
+                <th>Date Joined</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in entries %}
+            <tr>
+                <td>{{ entry[0] }}</td>
+                <td>{{ entry[1] }}</td>
+                <td>{{ entry[2] }}</td>
+                <td>{{ entry[3] }}</td>
+                <td>{{ entry[4] }}</td>
+                <td>{{ entry[5] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <br>
+</body>
+
+</html>

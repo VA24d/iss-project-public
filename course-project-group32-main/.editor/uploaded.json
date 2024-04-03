@@ -1,0 +1,54 @@
+{
+  "media": {
+    "1": {
+      "type": "image",
+      "location": "./icons/plus.svg",
+      "format": "svg"
+    },
+    "2": {
+      "type": "video",
+      "location": "./vid/x2mate.com-2020 LG OLED l The Black 4K HDR 60fps-(1080p60 HDR).mp4",
+      "format": "mp4"
+    },
+    "3": {
+      "type": "image",
+      "location": "./img/t50_revs.jpeg",
+      "format": "jpeg"
+    },
+    "4": {
+      "type": "image",
+      "location": "./img/t50_boost.jpeg",
+      "format": "jpeg"
+    },
+    "5": {
+      "type": "image",
+      "location": "./img/t50_front.jpeg",
+      "format": "jpeg"
+    },
+    "6": {
+      "type": "image",
+      "location": "./img/LFA.jpeg",
+      "format": "jpeg"
+    }
+  },
+
+  "transition": {
+    "type": "fade",
+    "specification": "make object gradually fade in and out of view"
+  },
+
+  "music": {
+    "1": {
+      "location": "./music/Butter.mp3",
+      "type": "mp3"
+    },
+    "2": {
+      "location": "./music/SOS.mp3",
+      "type": "mp3"
+    },
+    "3": {
+      "location": "./music/Tired.mp3",
+      "type": "mp3"
+    }
+  }
+}

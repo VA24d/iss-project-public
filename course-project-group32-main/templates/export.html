@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <style>
+    .favicon {
+      border-radius: 10px;
+    }
+  </style>
+  <link rel="icon" type="image/jpeg" href="/static/icons/ISIS logo.jpeg" class="favicon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Export your video</title>
+  <link rel="stylesheet" href="/static/export_styles.css">
+</head>
+
+<body>
+
+  <body>
+    <header>
+      <div id="L_P">
+        <img class="logo" src="/static/icons/ISIS logo.jpeg">
+        <p>ISIS</p>
+        <img class="pp" src="{{ profile_pic }}">
+      </div>
+      <div id="Navbar">
+        <ul style="list-style-type: none;">
+          <li>
+            <button onclick="confirmAndNavigate('/gallery')">Home</button>
+          </li>
+          <li>
+            <button onclick="confirmAndGoBack()">Back to editor</button>
+          </li>
+          <li>
+            <button id="Exit" onclick="closeTab()">
+              <p>Exit</p><img src="../static/icons/trash-2.svg" alt="Trash Icon">
+            </button>
+          </li>
+        </ul>
+      </div>
+    </header>
+
+    <div class="container">
+      <div id="controls">
+        <h1>Export your video</h1>
+        <form id="videoForm">
+          <label for="resolution">Resolution:</label>
+          <select id="resolution" name="resolution" class="modern-dropdown" onchange="submitForm()">
+            <option value="480">480p SD</option>
+            <option selected value="720">720 HD</option>
+            <option value="1080">1080p Full HD</option>
+            <option value="2160">4K Ultra HD</option>
+          </select>
+
+          <label for="fps">FPS (Frames Per Second):</label>
+          <select id="fps" name="fps" class="modern-dropdown" onchange="submitForm()">
+            <option value="24">24 FPS</option>
+            <option selected value="30">30 FPS</option>
+            <option value="60">60 FPS</option>
+            <option value="120">120 FPS</option>
+          </select>
+
+          <!-- <button id="export_Btn" type="button" onclick="">Export</button> -->
+
+          <a id="export_Btn" href="{{ video_path }}" download>Export</a>
+        </form>
+      </div>
+
+      <video id="current_vid" controls>
+        <!-- <source src="{{vid_src}}" type="video/mp4"> -->
+        <source src="{{ video_path }}" type="video/mp4">
+        Your browser does not support HTML video.
+      </video>
+
+    </div>
+
+    <script src="/static/export_script.js"></script>
+  </body>
+
+</html>

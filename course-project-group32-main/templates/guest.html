@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        .favicon {
+          border-radius: 10px;
+        }
+      </style>
+      <link rel="icon" type="image/jpeg" href="/static/icons/ISIS logo.jpeg" class="favicon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Details</title>
+    <style>
+        body {
+            font-family: Verdana, sans-serif;
+            background-color: rgb(6, 22, 38);
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            animation: fadeInAnimation ease 1s;
+            animation-iteration-count: 1;
+            animation-fill-mode: forwards;
+        }
+
+        .standard_logo {
+            font-style: italic;
+            text-align: left;
+            font-size: 35px;
+            padding: auto;
+            animation: fadeInAnimation ease 1s;
+        }
+
+        @keyframes fadeInAnimation {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .container {
+            background-color: white;
+            border-radius: 20px;
+            padding: 30px;
+            width: auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation: slideInAnimation ease 1s;
+            animation-iteration-count: 1;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes slideInAnimation {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color:  rgb(6, 22, 38);
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+
+        .user-details {
+            width: auto;
+            background-color: #f4f4f4;
+            border-radius: 8px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            color:  rgb(6, 22, 38);
+        }
+
+        .user-details h2 {
+            text-align: center;
+            margin-top: 0;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .user-details p {
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        .logout-btn {
+            width: auto;
+            justify-content: center;
+            align-items: center;
+            align-self: center;
+            display: block;
+            width: 100%;
+            background-color: cadetblue;
+            color: white;
+            border: none;
+            border-radius: 40px;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background-color: #5f9ea0;
+            size-adjust: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Welcome, {{username}}!</h1>
+        <div class="user-details">
+            <h2>User Details</h2>
+            <p><strong>Name:</strong>{{username}}</p>
+            <p><strong>Email:</strong> {{email_id}}</p>
+            <p><strong>Password:</strong> {{password}}</p>
+        </div>
+        <br>
+        <a href="/../auth/login" class="logout-btn">Logout</a>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,150 @@
+<html>
+
+<head>
+    <title>
+        Login
+    </title>
+    <link rel="stylesheet" href="styles.css"> <!--//../../../static/styles.css">-->
+    <style>
+        body {
+            background-color: rgb(6, 22, 38);
+            color: white;
+            font-family: Verdana, sans-serif;
+        }
+        @keyframes fadeInAnimation {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+
+        /* custom_styles */
+        /*platform*/
+        .standard_logo {
+            font-style: italic;
+            text-align: left;
+            font-size: 35px;
+            padding: auto;
+            animation: fadeInAnimation ease 1s;
+        }
+
+        .Login_flex {
+            content: flex 1 1 auto;
+            background-color: white;
+            color: rgb(6, 22, 38);
+            text-align: center;
+            align-content: center;
+            justify-content: center;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: auto;
+            margin-top: auto;
+            margin: auto;
+            width: 23%;
+            padding: 15px;
+            font-size: 105px;
+            border-radius: 60px;
+
+            animation: fadeInAnimation ease 3s;
+            animation-iteration-count: 1;
+            animation-fill-mode: forwards;
+        }
+
+        .login_header {
+            text-align: left;
+            align-content: left;
+            justify-content: left;
+
+            width: 50%;
+            padding: 15px;
+            font-size: 25px;
+            border-radius: 60px;
+        }
+
+        .login_label {
+            text-align: left;
+            align-content: left;
+            justify-content: left;
+
+            width: 90%;
+            padding: 15px;
+            font-size: 15px;
+            border-radius: 60px;
+
+            
+        }
+
+        .login_input {
+            text-align: left;
+            align-content: left;
+            justify-content: left;
+
+            width: 90%;
+            padding: 15px;
+            font-size: 15px;
+            border-radius: 60px;
+        }
+
+        .login_submit {
+            background-color: cadetblue;
+            width: 90%;
+            padding: 15px;
+            font-size: 15px;
+            border-radius: 60px;
+        }
+
+        .forget_password {
+            background-color: azure;
+            width: 90%;
+            padding: 15px;
+            font-size: 15px;
+            border-radius: 60px;
+
+            margin: 0%;
+        }
+
+        .redirect_register {
+            background-color: azure;
+            width: 90%;
+            padding: 15px;
+            font-size: 15px;
+            border-radius: 60px;
+
+            margin: 0%;
+        }
+    </style>
+</head>
+
+<body>
+    <p class="standard_logo">
+        VA
+    </p>
+    <div class="Login_flex">
+
+        <form action="" method="post">
+            <p class="login_header"> Log In:</p>
+            <label class="login_label" for="Username">Username / E-mail ID: </label><br>
+            <input class="login_input" type="text" id="username" name="username" placeholder="Username / E-mail ID"><br>
+            <label class="login_label" for="password">Password: </label><br>
+            <input class="login_input" type="password" id="password" name="password" placeholder="Password""><br><br>
+            <input class=" login_submit" type="submit" value="Log In" onclick="location.href='./../editor/p2v.html';">
+
+            <p class="User doesn't exist"> </p>
+        </form>
+
+        <input type="button" class="forget_password" onclick="window.location.href='forgot.html';"
+            value="Forgot password? Click to reset.">
+        <hr width=90%>
+        <input type="button" class="redirect_register" onclick="window.location.href='./register.html';"
+            value="Don't have an account? Register!">
+
+    </div>
+
+
+</body>
+
+</html>

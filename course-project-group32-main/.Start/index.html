@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing page With Dynamic Images</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+
+            <img src="logo.png" alt="" class="logo">
+            <ul class="nav__menu">
+                <li><a href="./../auth/login.html" target="_blank">Login</a></li>
+                <li><a href="./../auth/register.html" target="_blank">Register</a></li>
+            </ul>
+        </div>
+    
+        <div class="row">
+            <div class="left-col">
+                <div class="content" id="text-content">
+                    <h1><span>Photography</span> is a love affair with life</h1>
+                    <p>What makes a photograph a strange invention is that its primary raw materials are light and time</p>
+                    <div class="arrow">
+                        <img src="arrow.png" alt="">
+                    </div>
+                    <img src="art.png" alt="" class="art">
+                </div>
+            </div>
+            <div class="right-col" id="image-container">
+                <img src="pic1.png" alt="" id="picture">
+            </div>
+        </div>
+        <div class="controller">
+            <ul>
+                <li class="active btn">1</li>
+                <li class="btn">2</li>
+                <li class="btn">3</li>
+                <li class="btn">4</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        var btn = document.getElementsByClassName("btn");
+        var picture = document.getElementById("picture");
+        var imageContainer = document.getElementById("image-container");
+        var currentIndex = 0;
+
+        function updateImage() {
+            picture.src = "pic" + (currentIndex + 1) + ".png";
+            let current = document.getElementsByClassName("active");
+            current[0].className = current[0].className.replace("active", "");
+            btn[currentIndex].className += " active";
+            currentIndex = (currentIndex + 1) % btn.length;
+
+            // Get the dominant color of the current image
+            getDominantColor();
+        }
+
+        function getDominantColor() {
+            var canvas = document.createElement("canvas");
+            var ctx = canvas.getContext("2d");
+            var img = new Image();
+            img.crossOrigin = "Anonymous";
+            img.src = picture.src;
+
+            img.onload = function () {
+                canvas.width = img.width;
+                canvas.height = img.height;
+                ctx.drawImage(img, 0, 0, img.width, img.height);
+
+                // Get the dominant color from the center of the image
+                var pixelData = ctx.getImageData(img.width / 2, img.height / 2, 1, 1).data;
+                var dominantColor = {
+                    red: pixelData[0],
+                    green: pixelData[1],
+                    blue: pixelData[2]
+                };
+
+                // Set the background color of the image container
+                imageContainer.style.backgroundColor = `rgb(${dominantColor.red}, ${dominantColor.green}, ${dominantColor.blue})`;
+            };
+        }
+
+        function startImageRotation() {
+            setInterval(updateImage, 500); // Switch image every 5 seconds
+        }
+
+        // Start automatic image rotation
+        startImageRotation();
+
+        // Initial image
+        updateImage();
+    </script>
+
+    <script src="script.js"></script>
+</body>
+</html>

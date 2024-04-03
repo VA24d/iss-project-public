@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration successful</title>
+    <style>
+        body {
+            background-color: rgb(6, 22, 38);
+            color: white;
+            font-family: Verdana, sans-serif;
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+        }
+        @keyframes fadeInAnimation {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+        
+        .standard_logo {
+            font-style: italic;
+            text-align: left;
+            font-size: 35px;
+            padding: auto;
+            animation: fadeInAnimation ease 1s;
+        }
+
+        .success_flex {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+            flex-direction: column;
+
+            border: 1px solid white;
+            border-radius: 40px;
+            width: auto;
+            height: auto;
+            padding: 10px;
+        }
+
+        .success_text {
+            font-size: 50px;
+            margin: 0 20px;
+            /* Add some margin between the text and the fireworks */
+        }
+
+        .send_button {
+            background-color: cadetblue;
+            width: 90%;
+            
+            /* border: 10px; */
+            padding: 15px;
+            font-size: 15px;
+            border-radius: 60px;
+            align-self: center;
+            cursor: pointer;
+            animation: fadeInAnimation ease 1s;
+        }
+    </style>
+</head>
+
+<body>
+    <p class="standard_logo">
+        VA
+    </p>
+    <div class="success_flex">
+        <div class="firework"></div>
+        <p class="success_text">
+            Registration successful
+        </p>
+        <br>
+        <p class="success_text">
+            Welcome, {{ username }}!
+        </p>
+        <div class="firework"></div>
+    </div>
+    <br>
+    <div style="align-content: center;">
+    <input class="send_button" type="button" onclick="window.location.href='{{ url_for('user_webpage', usr=username) }}';"value="Click to go to webpage">
+    </div>
+</body>
+
+</html>

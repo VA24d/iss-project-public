@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        .favicon {
+          border-radius: 10px;
+        }
+      </style>
+      <link rel="icon" type="image/jpeg" href="/static/icons/ISIS logo.jpeg" class="favicon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photos to Video converter</title>
+    <link rel="stylesheet" href="/static/editor_styles.css">
+</head>
+
+<body>
+    <div id="customRightClickMenu" class="right-click-menu">
+        <ul id="menuItems">
+            <!-- Menu items will be dynamically added here -->
+        </ul>
+    </div>
+
+    <nav class="nav_flex">
+        <button class="nav_btn" id="Home_btn" onclick="location.href = '/gallery'">Home</button>
+        <button class="nav_btn" id="File_btn" onclick="toggleFileMenu()">File</button>
+        <div class="nav_menu" id="file_menu">
+            <a style="cursor:pointer; padding: auto; text-decoration: none;"">Open</a>
+            <a style=" cursor:pointer; padding: auto; text-decoration: none;"">Save</a>
+        </div>
+
+        <button class="nav_btn" id="Import_btn" onclick="toggleImportMenu()">Import</button>
+        <div class="nav_menu" id="import_menu">
+            <a style="cursor:pointer; padding: auto; text-decoration: none;"" onclick=" location
+                .href='./../Upload/index.html' ;">Photos</a>
+            <!-- <a style="cursor:pointer; padding: auto; text-decoration: none;"">Videos</a> -->
+            <a style="cursor:pointer; padding: auto; text-decoration: none;"">Audio</a>
+            <a style=" cursor:pointer; padding: auto; text-decoration: none;"">Transitions</a>
+        </div>
+        <button class="nav_btn" id="View_btn" onclick="toggleViewMenu()">View</button>
+        <div class="nav_menu" id="view_menu">
+            <a id="maximize_button" style="cursor:pointer; padding: auto; text-decoration: none;"" onclick="
+                toggleFullscreen()">Fullscreen</a>
+            <!-- <a style="cursor:pointer; padding: auto; text-decoration: none;"">Minimize</a> -->
+            <a style="cursor:pointer; padding: auto; text-decoration: none;"" onclick=" toggleDarkMode()">Dark Mode</a>
+            <hr>
+            <a style="cursor:pointer; padding: auto; text-decoration: none;"" onclick=" toggle_sidebar()">Sidebar</a>
+            <a style="cursor:pointer; padding: auto; text-decoration: none;"" onclick=" toggle_timeline()">Timeline</a>
+        </div>
+
+        <button class="nav_btn" id="Export_btn" onclick="toggleExportMenu()">Export</button>
+        <div class="nav_menu" id="export_menu">
+            <a style="cursor:pointer; padding: auto; text-decoration: none;">Export settings</a>
+            <a style=" cursor:pointer; padding: auto; text-decoration: none;" onclick="initExp()">Export</a>
+        </div>
+
+        <button class="nav_btn" id="Help_btn" onclick="toggleHelpMenu()">Help</button>
+        <div class="nav_menu" id="help_menu">
+            <input type="text" placeholder="Search">
+            <hr>
+            <a style="cursor:pointer; padding: auto; text-decoration: none;"">FAQ</a>
+        </div>
+
+        <div class=" auto_btn" id="Upload_btn" onclick="">
+                <img src="../static/icons/plus.svg" alt="Plus">
+                Smart Upload
+        </div>
+
+        <button id="Profile_btn" onclick="toggleProfileMenu()">
+        <img>
+        <source src"{{ user_profile_pic}}" >
+        No profile pic fix flask
+        </img>
+        </button>
+        <div class="nav_menu" id="profile_menu">
+
+        </div>
+
+    </nav>
+
+    <hr style="width: 100%;">
+
+    <div id="main_viewport" class="main_flex">
+        <div id="sidebar" class="sidebar_flex">
+
+            <!-- <div id="sidebar_header">
+                <input id="sidebarSearch" type="search" placeholder="Search">
+                <div id="search_radio">
+                    <input id="search1" type="radio" name="radio" value="Photos" checked>Photos</input>
+                    <input id="search2" type="radio" name="radio" value="Videos">Videos</input>
+                    <input id="search3" type="radio" name="radio" value="Audio">Audio</input>
+                </div>
+            </div> -->
+
+            <div id="sidebarHeader">
+                <input id="sidebarSearch" type="search" placeholder="Search">
+                <div id="search_radio">
+                    <label for="search1" class="checkbox-label">
+                        <input id="search1" type="checkbox" name="radio" value="Photos" checked>Photos
+                    </label>
+                    <label for="search2" class="checkbox-label">
+                        <input id="search2" type="checkbox" name="radio" value="Videos">Videos
+                    </label>
+                    <label for="search3" class="checkbox-label">
+                        <input id="search3" type="checkbox" name="radio" value="Audio">Audio
+                    </label>
+                </div>
+            </div>
+
+            <div id="sidebar_content">
+                <button id="Media_btn" class="sidebar_btn" onclick="media_toggle()">
+                    <img id="mediaArrow" class="arrow" src="/static/icons/chevron-down.svg">
+                    Media
+                </button>
+                <div id="media_content" class="media_flex" ondrop="handleDrop(event)"
+                    ondragover="handleDragOver(event)">
+                    {%for image_data in image_list%}
+                    <div class="OImg" id="{{ image_data[0] }}" onclick="setTransition('{{ image_data[0] }}')">
+                        <!-- ../from mysql -->
+                        <img class="backgroundg" src="data:{{image_data[1]}};base64,{{image_data[2]}}"
+                            alt="Timeline Image">
+                    </div>
+                    {%endfor%}
+                </div>
+
+                <button id="Transitions_btn" class="sidebar_btn" onclick="transition_toggle()">
+                    <img id="transitionArrow" class="arrow" src="/static/icons/chevron-down.svg">
+                    <p>Transitions</p>
+                </button>
+                <div id="transition_content" class="transition_flex">
+                    <ul style="list-style-type: none;">
+                        <li id="FadeTransition" onclick="selectTransition('Fade')">Fade</li>
+                        <!-- <li id="SlideupTransition" onclick="selectTransition('Slideup')">Slide Up</li>
+                        <li id="SlidedownTransition" onclick="selectTransition('Slidedown')">Slide Down</li>
+                        <li id="SlideleftTransition" onclick="selectTransition('Slideleft')">Slide Left</li>
+                        <li id="SliderightTransition" onclick="selectTransition('Slideright')">Slide Right</li> -->
+                        <li id="SlideTransition" onclick="selectTransition('Slide')">Slide</li>
+                        <!-- <li id="CartwheelTransition" onclick="selectTransition('Cartwheel')">Cartwheel</li>
+                        <li id="BoxTransition" onclick="selectTransition('Box')">Box</li>
+                        <li id="WipeTransition" onclick="selectTransition('Wipe')">Wipe</li> -->
+                        <li id="ColorTransition" onclick="selectTransition('Color')">Color</li>
+                        <!-- <li id="SplitTransition" onclick="selectTransition('Split')">Split</li> -->
+                        <!-- <li id="ZoomTransition" onclick="selectTransition('Zoom')">Zoom</li> -->
+                        <li id="NoneTransition" onclick="selectTransition('None')">None</li>
+                    </ul>
+
+                    <select id="slideSelect" class="modern-dropdown">
+                        <option value="up">Up</option>
+                        <option value="down">Down</option>
+                        <option value="left">Left</option>
+                        <option value="right">Right</option>
+                    </select>
+
+                    <form id="colFTrans">
+                        <input type="text" id="colorInput" placeholder="Color (WEB-3), then Enter" />
+                    </form>
+
+                </div>
+
+                <button id="Music_btn" class="sidebar_btn" onclick="music_toggle()">
+                    <div><img id="musicArrow" class="arrow" src="/static/icons/chevron-down.svg"></div>
+                    <p>Music</p>
+                </button>
+                <div id="music_content" class="music_flex" ondrop="handleDrop(event)"
+                    ondragover="handleDragOver(event)">
+                    <h3>Sound Tracks</h3>
+                    {%for audio_data in predef_audio_s%}
+                    <div class="sidebar_audio_item" onclick="sendAudio('{{ audio_data[0] }}', 0)">
+                        <p>
+                            <b>{{ audio_data[0] }}</b>
+                        </p>
+                        <p>
+                            Duration: {{ audio_data[2]}}
+                        </p>
+                        <audio controls>
+                            <source src="data:audio/mp3;base64,{{audio_data[1]}}">
+                            Audio not accessible
+                        </audio>
+                    </div>
+                    {%endfor%}
+                    <!-- <a></a> -->
+                    <hr>
+                    <h3>Transitions</h3>
+                    {%for audio_data in predef_audio_t%}
+                    <div class="sidebar_audio_item" onclick="sendAudio('{{ audio_data[0] }}', 1)">
+                        <p>
+                            <b>{{ audio_data[0] }}</b>
+                        </p>
+                        <p>
+                            Duration: {{ audio_data[2]}}
+                        </p>
+                        <audio controls>
+                            <source src="data:audio/mp3;base64,{{audio_data[1]}}">
+                            Audio not accessible
+                        </audio>
+                    </div>
+                    {%endfor%}
+                </div>
+            </div>
+
+            <script>
+                function init_arrows() {
+                    arrows = ['mediaArrow', 'transitionArrow', 'musicArrow'];
+                    for (let x of arrows) {
+                        var icon = document.getElementById(x);
+                        icon.classList.remove('active');
+                    }
+
+                    ids = ['media_content', 'transition_content', 'music_content']
+                    for (let x of ids) {
+                        var Content = document.getElementById(x);
+                        Content.style.display = 'none';
+                    }
+                }
+                init_arrows();
+            </script>
+        </div>
+
+
+        <div id="video_and_timeline">
+            <div id="video">
+                <video id="current_vid" controls>
+                    <source src="{{vid_src}}" type="video/mp4">
+                    Your browser does not support HTML video.
+                </video>
+            </div>
+            <hr>
+            <div id="controls" class="controls">
+                <img class="control_icons" src="/static/icons/airplay.svg" id="airplay" onclick="airplayRun()">
+                <div class="center-group">
+                    <img class="control_icons" src="/static/icons/rewind.svg" id="rewind" onclick="rewind()">
+                    <img class="control_icons" src="/static/icons/skip-back.svg" id="skip_back" onclick="skip_back()">
+                    <img class="control_icons" src="/static/icons/play.svg" id="play_pause" onclick="play_pause()">
+                    <img class="control_icons" src="/static/icons/skip-forward.svg" id="skip_forward"
+                        onclick="skip_forward()">
+                    <img class="control_icons" src="/static/icons/fast-forward.svg" id="fast_forward"
+                        onclick="fast_forward()">
+                    <img class="control_icons" src="/static/icons/repeat.svg" id="repeat" onclick="repeat()">
+                </div>
+                <img class="control_icons" src="/static/icons/maximize.svg" id="maximize" onclick="maximize()">
+            </div>
+
+            <hr>
+
+            <div id="timeline" class="timeline_class">
+
+                <div id="visual" class="timeline-visual">
+                    <!-- Timeline events will go here -->
+                    {%for image_data in image_list%}
+                    <div class="OImg" id="{{ image_data[0] }}" onclick="setTransition('{{ image_data[0] }}')">
+                        <!-- ../from mysql -->
+                        <p class="img_caption">{{ image_data[3] }}</p>
+
+                        <img class="backgroundg" src="data:{{image_data[1]}};base64,{{image_data[2]}}"
+                            alt="Timeline Image">
+
+                        <button id="del_btn" class="img_btn" onclick="delete_img(image_number)"><img
+                                src="./../static/icons/trash-2.svg" alt="delete"></button>
+                        <button id="left_btn" class="img_btn" onclick="move_left(image_number)"><img
+                                src="./../static/icons/chevron-right.svg" style="transform: rotate(180deg);"
+                                alt="left"></button>
+                        <button id="right_btn" class="img_btn" onclick="move_right(image_number)"><img
+                                src="./../static/icons/chevron-right.svg" alt="right"></button>
+                        <!-- <br>
+                            <input type="range" name="duration" min="0" max="100">
+                            <p class="range_value">5s</p> -->
+                        <select id="{{image_data[0]}}_duration" class="modern-dropdown" onchange="updateVid()">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option selected value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                        <!-- <br> -->
+                        <p class="timeline_transition"> Transition </p>
+                    </div>
+                    <!-- <img src="data:{{image_data[1]}};base64,{{image_data[2]}}" loading="lazy" class="gallery_item_image" id="{{image_data[0]}}"> -->
+                    {%endfor%}
+
+                    <button style="border-radius: 10px; align-self: center; margin-right: 20px; border: 3px solid blue; padding: 3px;" onclick="uploadImage()">
+                        <img src="../static/icons/plus.svg">
+                    </button>
+
+                </div>
+                <!-- </div> -->
+
+                <div id="audio" class="timeline-audio">
+
+                    {%for audio_data in audio_list%}
+
+                    <div class="OAud">
+                        <!-- ../from mysql -->
+                        <p class="aud_caption">{{ audio_data[1] }} </p>
+
+                        <!-- <audio >
+                            <src>{{audio_data[1]}}</src>
+                            Audio not accessible
+                        </audio>  -->
+
+                        <button class="aud_btn" onclick="delete_img(image_number)"><img
+                                src="./../static/icons/trash-2.svg" alt="delete"></button>
+                        <button class="aud_btn" onclick="move_left(image_number)"><img
+                                src="./../static/icons/chevron-right.svg" class="rotate" alt="left"></button>
+                        <button class="aud_btn" onclick="move_right(image_number)"><img
+                                src="./../static/icons/chevron-right.svg" alt="right"></button>
+
+                        <select name="duration" class="modern-dropdown">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="default">Default</option>
+                        </select>
+                    </div>
+
+                    {%endfor%}
+
+                    <button style="border-radius: 10px; align-self: center; margin-right: 20px; border: 3px solid blue; padding: 3px;" onclick="uploadAudio()">
+                        <img src="../static/icons/plus.svg">
+                    </button>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <script src="/static/editor_script.js"></script>
+</body>
+
+</html>

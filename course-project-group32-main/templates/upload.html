@@ -1,0 +1,52 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>drag and drop</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <link rel="stylesheet" href="/static/upload.css">
+  <script src="/static/upload.js" defer></script>
+
+</head>
+
+<body>
+  <header>
+    <div id="L_P">
+      <img class="logo" src="/static/icons/ISIS logo.jpeg">
+      <p>ISIS</p>
+      <img class="pp" src="{{ profile_pic}}">
+    </div>
+    <div id="Navbar">
+      <ul style="list-style-type: none ;">
+        <li><button onclick="">Home</button></li>
+        <li><button onclick="">Image</button></li>
+        <li><button onclick="">Audio</button></li>
+      </ul>
+    </div>
+  </header>
+  <br>
+
+  <div id="drop-area">
+
+    <form class="my-form" enctype="multipart/form-data" onsubmit="return uploadFiles()">
+      <p>Upload multiple files with the file dialog or by dragging and dropping images onto the dashed region</p>
+
+
+      <input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)">
+
+
+      <label class="button" for="fileElem">Select some files</label>
+      <input type="submit" class="button" value="Upload" id="submit_button">
+    </form>
+
+    <progress id="progress-bar" max="100" value="0"></progress>
+    <span id="progress-text">0%</span>
+
+    <div id="gallery" />
+  </div>
+  </div>
+
+</body>
+
+</html>

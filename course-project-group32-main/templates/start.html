@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISS Web Editor</title>
+    <link rel="icon" type="image/jpeg" href="/static/icons/ISS_logo.jpeg">
+    <link rel="stylesheet" href="/static/start.css">
+</head>
+
+<body>
+    <header>
+
+        <div id="L_P">
+            <img class="logo" src="/static/icons/ISIS logo.jpeg">
+            <p>ISS</p>
+            <div class="pp">
+                <button onclick="window.location.href='/login'">Log In</button>
+                <button onclick="window.location.href='/register'">Sign up</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <h1>Welcome to ISS, a modern web-based video editor</h1>
+
+        <!-- Slideshow container -->
+        <div class="slideshow-container">
+            <!-- Full-width images with number and caption text -->
+            <div class="mySlides">
+                <img src="/static/images/start_img1.jpeg" alt="Slide 1">
+            </div>
+
+            <div class="mySlides">
+                <img src="/static/images/start_img2.png" alt="Slide 2">
+            </div>
+
+            <div class="mySlides">
+                <img src="/static/images/start_img3.png" alt="Slide 3">
+            </div>
+
+            <!-- Dots -->
+            <div class="dots-container">
+                <span class="dot" onclick="toSlide(0)"></span>
+                <span class="dot" onclick="toSlide(1)"></span>
+                <span class="dot" onclick="toSlide(2)"></span>
+            </div>
+        </div>
+
+        <!-- Sections -->
+        <section id="about">
+            <h2>About</h2>
+            <p>
+                Our video editor, built using Flask, HTML, JavaScript, CSS, CockroachDB, and Microsoft Azure,
+                provides users
+                with a comprehensive set of tools for editing videos seamlessly in the browser.
+            </p>
+        </section>
+
+        <section id="features">
+            <h2>Features</h2>
+            <ul>
+                <li>Intuitive user interface</li>
+                <li>Real-time collaboration</li>
+                <li>Advanced editing tools</li>
+                <li>Integration with cloud storage</li>
+                <li>Scalable infrastructure</li>
+            </ul>
+        </section>
+
+        <section id="technology">
+            <h2>Technology Stack</h2>
+            <ul>
+                <li>Flask for backend development</li>
+                <li>HTML, JavaScript, and CSS for frontend</li>
+                <li>CockroachDB for distributed database management</li>
+                <li>Microsoft Azure for cloud hosting and services</li>
+            </ul>
+        </section>
+
+        <!-- Navigation -->
+        <nav>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#technology">Technology</a></li>
+            </ul>
+        </nav>
+        <footer>
+            <p>&copy; 2024 ISIS. All rights reserved.<br>By Vijay Aravynthan, Harshil Singh and Shlok Sand</p>
+        </footer>
+        <div style="position: fixed; bottom: 20px; right: 20px;">
+            <a id="try_Btn" onclick="window.location.href = '/gallery'">Try now</button>
+        </div>
+    </div>
+
+    <!-- JavaScript for slideshow -->
+    <script src="/static/start.js">
+    </script>
+</body>
+
+</html>

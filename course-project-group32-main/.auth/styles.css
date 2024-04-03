@@ -1,0 +1,167 @@
+/* default_styles */
+body {
+    background-color: rgb(6, 22, 38);
+    color: white;
+    font-family: Verdana, sans-serif;
+}
+
+
+/* custom_styles */
+/*platform*/
+.standard_logo {
+    text-align: left;
+}
+
+
+
+/* register.html */
+.Register_flex{
+    content: flex 1 1 auto;
+    background-color: white;
+    color: rgb(6, 22, 38);
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+    margin-top: auto;
+    margin: auto;
+    width: 23%;
+    padding: 15px;
+    font-size: 105px;
+    border-radius: 60px;
+}
+
+.register_header {
+    text-align: left;
+    align-content: left;
+    justify-content: left;
+    
+    width: 50%;
+    padding: 15px;
+    font-size: 25px;
+    border-radius: 60px;
+}
+
+.register_label{
+    text-align: left;
+    align-content: left;
+    justify-content: left;
+
+    width: 90%;
+    padding: 15px;
+    font-size: 15px;
+    border-radius: 60px;
+}
+
+.register_input{
+    text-align: left;
+    align-content: left;
+    justify-content: left;
+
+    width: 90%;
+    padding: 15px;
+    font-size: 15px;
+    border-radius: 60px;
+}
+
+.register_submit{
+    background-color: cadetblue;
+    width: 90%;
+    padding: 15px;
+    font-size: 15px;
+    border-radius: 60px;
+}
+
+.redirect_login {
+    background-color: azure;
+    width: 90%;
+    padding: 15px;
+    font-size: 15px;
+    border-radius: 60px;
+
+    margin: 0%;
+}
+
+
+
+/* login.html */
+.Login_flex {
+    content: flex 1 1 auto;
+    background-color: white;
+    color: rgb(6, 22, 38);
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+    margin-top: auto;
+    margin: auto;
+    width: 23%;
+    padding: 15px;
+    font-size: 105px;
+    border-radius: 60px;
+}
+
+.login_header {
+    text-align: left;
+    align-content: left;
+    justify-content: left;
+
+    width: 50%;
+    padding: 15px;
+    font-size: 25px;
+    border-radius: 60px;
+}
+
+.login_label{
+    text-align: left;
+    align-content: left;
+    justify-content: left;
+
+    width: 90%;
+    padding: 15px;
+    font-size: 15px;
+    border-radius: 60px;
+}
+
+.login_input{
+    text-align: left;
+    align-content: left;
+    justify-content: left;
+
+    width: 90%;
+    padding: 15px;
+    font-size: 15px;
+    border-radius: 60px;
+}
+
+.login_submit{
+    background-color: cadetblue;
+    width: 90%;
+    padding: 15px;
+    font-size: 15px;
+    border-radius: 60px;
+}
+
+.forget_password {
+    background-color: azure;
+    width: 90%;
+    padding: 15px;
+    font-size: 15px;
+    border-radius: 60px;
+
+    margin: 0%;
+}
+
+.redirect_register {
+    background-color: azure;
+    width: 90%;
+    padding: 15px;
+    font-size: 15px;
+    border-radius: 60px;
+
+    margin: 0%;
+}

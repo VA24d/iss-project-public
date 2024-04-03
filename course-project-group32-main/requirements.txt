@@ -1,0 +1,15 @@
+Flask
+numpy
+soundfile
+ffmpeg-python
+moviepy
+Werkzeug
+PyJWT
+mysql-connector-python
+pillow
+psycopg2-binary
+pydub
+opencv-python
+matplotlib
+librosa
+webcolors
