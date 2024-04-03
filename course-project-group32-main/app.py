@@ -638,4 +638,4 @@ def login_user():
 
 if __name__ == "__main__":
     #print(os.environ["DATABASE_URL"])
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0")
