@@ -909,6 +909,8 @@ body.dark .timeline-audio {
     width: 20vw;
     height: 10vh;
     color: #007bff;
+    border: 2px solid #007bff;
+    border-radius: 20px;
 }
 
 #slideSelect {

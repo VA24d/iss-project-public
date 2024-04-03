@@ -688,7 +688,7 @@ function sendAudio(audio_id, list_number) {
     audio_ls.push(list_number);
 
     var audio_timeline = document.getElementById("audio");
-    var ch5 = audio_id.substring(0, 5);
+    var ch5 = audio_id.slice(-5);
 
     var audio_element = `
         <div class="OAud">
