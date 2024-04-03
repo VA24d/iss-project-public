@@ -5,6 +5,7 @@ var image_trans = {};
 var audio_ins = [];
 var audio_ls = [];
 
+var audio_number = 1;
 
 function media_toggle() {
     var transitionContent = document.getElementById('media_content');
@@ -587,11 +588,16 @@ function setTransition(id) {
     if (transitionMode) {
         Object.defineProperty(image_trans, id, { value: transitionType, writable: true, enumerable: true, });
         console.log(image_trans)
+        document.getElementById(id + "_transition").textContent = transitionType;
+        document.getElementById(id + "_transition").style.backgroundColor = "white";
+        if (transitionType == "None") {
+            document.getElementById(id + "_transition").style.backgroundColor = "transparent";
+        }
         resetTransitions();
         updateVid();
     }
     else {
-
+        console.log("No transition selected");
     }
 }
 
@@ -663,6 +669,33 @@ function sendAudio(audio_id, list_number) {
     audio_ins.push(audio_id);
     audio_ls.push(list_number);
 
+    var audio_timeline = document.getElementById("audio_timeline");
+    var audio_element = document.createElement("div");
+    audio_element.classList.add("OAud");
+
+    audio_element.innerHTML = `
+        <p class="aud_caption">${audio_id}</p>
+        <!-- <audio src="{{ audio_data[1] }}">Audio not accessible</audio> -->
+        <button class="aud_btn" onclick="delete_audio(${audio_number})"><img src="./../static/icons/trash-2.svg" alt="delete"></button>
+        <button class="aud_btn" onclick="move_left_a(${audio_number})"><img src="./../static/icons/chevron-right.svg" class="rotate" alt="left"></button>
+        <button class="aud_btn" onclick="move_right_a(${audio_number})"><img src="./../static/icons/chevron-right.svg" alt="right"></button>
+        <!-- <select name="duration" class="modern-dropdown">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="default">Default</option> -->
+        </select>`;
+
+    audio_timeline.appendChild(audio_element);
+
+    audio_number += 1;
     updateVid();
     //audio_timeline = document.getElementById("audio");
 
@@ -701,8 +734,7 @@ function sendAudio(audio_id, list_number) {
 
 }
 
-function initExp()
-{
+function initExp() {
     let image_dur = {}
 
     img_order = [];

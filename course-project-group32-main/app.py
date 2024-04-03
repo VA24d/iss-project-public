@@ -337,7 +337,6 @@ def save_image(current_user):
         image_upload_in_prog = False
         return "", 400
 
-
 @app.route("/editor")
 @token_required
 def editor_page(current_user):
@@ -420,7 +419,6 @@ def editor_page(current_user):
         predef_audio_t=data_t,
         vid_src=vid_path,
     )
-
 
 @app.route("/update_vid", methods=["POST"])
 @token_required
@@ -678,4 +676,5 @@ def login_user():
 
 if __name__ == "__main__":
     # print(os.environ["DATABASE_URL"])
-    app.run(debug=True, host="0.0.0.0")
+    # app.run(debug=True, host="0.0.0.0")
+    app.run()
