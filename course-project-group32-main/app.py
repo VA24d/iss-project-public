@@ -263,7 +263,7 @@ def upload_page(current_user):
 def save_image(current_user):
     image_upload_in_prog = True
     try:
-        print("called once")
+        print("Called once")
         
         file_data = request.files["file"]
         file_extension = request.form["extn"]
@@ -311,7 +311,6 @@ def save_image(current_user):
             cursor.execute("insert into user_images (image_id, user_id, image_type, image_data, image_width, image_height, image_size, image_name) values (%s, %s, %s, %s, %s, %s, %s, %s)", (image_id, user_id, file_type, file_data, iw, ih, size_b, file_name))
             # print("executed")
             cnx.commit()
-            #cnx.close()
         except Exception as error:
             print(f"An exception occurred: {error}")
             #cnx.close()
@@ -322,12 +321,12 @@ def save_image(current_user):
 
         print(time.time())
 
-        return 200
+        return "success", 200
     except Exception as error:
         print(error)
-        print("reached here")
+        print("Reached here")
         image_upload_in_prog = False
-        return 400
+        return "", 400
 
 
 @app.route("/editor")

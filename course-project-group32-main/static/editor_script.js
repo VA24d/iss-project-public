@@ -567,7 +567,7 @@ function selectTransition(action) {
             // Further actions if needed
             var flashColor = document.getElementById('colorInput');
             flashColor.style.display = 'none';
-            transitionType = action + "--" + flashColor;
+            transitionType = action + "--" + inputValue;
             console.log(transitionType);
         });
 
