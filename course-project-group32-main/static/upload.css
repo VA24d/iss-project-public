@@ -236,12 +236,23 @@ input[type=file]::file-selector-button:hover {
 }
 
 #gallery img {
-  width: 100px;
-  height: auto;
+  height: 14vh;
+  width: auto;
   margin: 5px;
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s ease-in-out;
+  animation:  fade-in 1s forwards;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 #gallery img:hover {

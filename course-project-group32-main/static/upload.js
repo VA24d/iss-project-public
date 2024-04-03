@@ -1,3 +1,5 @@
+var DragFiles = FileList;
+
 if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
   // Dark mode is enabled
   console.log("Dark mode is enabled in the browser.");
@@ -80,9 +82,12 @@ function updateProgress(fileNumber, percent) {
 }
 
 function handleFiles(files) {
-  files = [...files]
+  var files = [...files]
+  var files2 = [...files];
+  // DragFiles += files;
   //initializeProgress(files.length)
   //files.forEach(uploadFile)
+  files.forEach(uploadFile)
   files.forEach(previewFile)
 }
 
@@ -96,35 +101,37 @@ function uploadFiles() {
   files.forEach(uploadFile);
   console.log('file upload completed');
   window.location.replace("/gallery");
+
   return false;
 }
 
 function previewFile(file) {
-  let reader = new FileReader()
-  reader.readAsDataURL(file)
+  let reader = new FileReader();
+  reader.readAsDataURL(file);
   reader.onloadend = function () {
-    let img = document.createElement('img')
-    img.src = reader.result
-    document.getElementById('gallery').appendChild(img)
+    let img = document.createElement('img');
+    img.src = reader.result;
+    document.getElementById('gallery').appendChild(img);
+    // DragFiles.append
   }
 }
 
 function uploadFile(file, i) {
-  console.log("inside upload file")
-  var url = '/image_upload'
-  var xhr = new XMLHttpRequest()
-  var formData = new FormData()
-  xhr.open('POST', url, true)
-  xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
+  console.log("Uploading " + file.name.toString() + "...");
+  var url = '/image_upload';
+  var xhr = new XMLHttpRequest();
+  var formData = new FormData();
+  xhr.open('POST', url, true);
+  xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
 
   // Update progress (can be used to show progress indicator)
   xhr.upload.addEventListener("progress", function (e) {
-    updateProgress(i, (e.loaded * 100.0 / e.total) || 100)
+    updateProgress(i, (e.loaded * 100.0 / e.total) || 100);
   })
 
   xhr.addEventListener('readystatechange', function (e) {
     if (xhr.readyState == 4 && xhr.status == 200) {
-      updateProgress(i, 100) // <- Add this
+      updateProgress(i, 100); // <- Add this
     }
     else if (xhr.readyState == 4 && xhr.status != 200) {
       // Error. Inform the user
@@ -132,9 +139,9 @@ function uploadFile(file, i) {
   })
 
   //formData.append('upload_preset', 'ujpu6gyk')
-  formData.append('file', file)
-  formData.append('extn', file.name.split('.').pop())
-  formData.append('file_name', file.name.split(/(\\|\/)/g).pop())
-  formData.append('file_type', file.type)
-  xhr.send(formData)
+  formData.append('file', file);
+  formData.append('extn', file.name.split('.').pop());
+  formData.append('file_name', file.name.split(/(\\|\/)/g).pop());
+  formData.append('file_type', file.type);
+  xhr.send(formData);
 }
