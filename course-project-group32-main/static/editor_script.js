@@ -658,7 +658,7 @@ function updateVid() {
             console.log(document.getElementById("current_vid").children[0].getAttribute('src'));
             document.getElementById("current_vid").children[0].setAttribute('src', old_src);
             document.getElementById("current_vid").load();
-            document.getElementById("current_vid").play()
+            // document.getElementById("current_vid").play()
         }
     })
 
