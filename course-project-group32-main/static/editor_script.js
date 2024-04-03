@@ -662,38 +662,39 @@ function updateVid() {
 }
 
 
+function delete_audio(id) {
+    var audio_timeline = document.getElementById("audio_timeline");
+    var audio_element = document.getElementById(id);
+    audio_timeline.removeChild(audio_element);
+    audio_number -= 1;
+    updateVid();
+}
 
+function move_left_a(id) {
+
+}
+
+function move_right_a(id) {
+
+}
 
 function sendAudio(audio_id, list_number) {
     console.log(audio_id);
     audio_ins.push(audio_id);
     audio_ls.push(list_number);
 
-    var audio_timeline = document.getElementById("audio_timeline");
-    var audio_element = document.createElement("div");
-    audio_element.classList.add("OAud");
+    var audio_timeline = document.getElementById("audio");
+    var ch5 = audio_id.substring(0, 5);
 
-    audio_element.innerHTML = `
-        <p class="aud_caption">${audio_id}</p>
-        <!-- <audio src="{{ audio_data[1] }}">Audio not accessible</audio> -->
+    var audio_element = `
+        <div class="OAud">
+        <p class="aud_caption">${ch5}</p>
         <button class="aud_btn" onclick="delete_audio(${audio_number})"><img src="./../static/icons/trash-2.svg" alt="delete"></button>
         <button class="aud_btn" onclick="move_left_a(${audio_number})"><img src="./../static/icons/chevron-right.svg" class="rotate" alt="left"></button>
         <button class="aud_btn" onclick="move_right_a(${audio_number})"><img src="./../static/icons/chevron-right.svg" alt="right"></button>
-        <!-- <select name="duration" class="modern-dropdown">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-            <option value="default">Default</option> -->
-        </select>`;
+        </div>`;
 
-    audio_timeline.appendChild(audio_element);
+    audio_timeline.innerHTML+=audio_element;
 
     audio_number += 1;
     updateVid();
