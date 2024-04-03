@@ -908,6 +908,7 @@ body.dark .timeline-audio {
     display: inline-block;
     width: 20vw;
     height: 10vh;
+    color: #007bff;
 }
 
 #slideSelect {
