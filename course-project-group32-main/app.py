@@ -8,23 +8,23 @@ print("The program has been initialized")
 # os.system("clear")
 
 try:
-    from editor import create_audio_data
+    # from editor import create_audio_data
     #import azure.functions as func
-    import tempfile
+    # import tempfile
     import editor
-    from calendar import c
+    # from calendar import c
     # from sqlite3 import connect
-    from venv import create
+    # from venv import create
     import moviepy.editor as mpe
     # import soundfile as sf
-    from numpy import insert
+    # from numpy import insert
     from flask import (
         Flask,
         request,
-        jsonify,
+        # jsonify,
         make_response,
         render_template,
-        flash,
+        # flash,
         redirect,
         url_for,
     )
@@ -110,53 +110,53 @@ def connect_and_create_table(table_name, create_table_query):
 
     return cnx, cursor, count
 
-def add_predefined_audios(table_name, directory):
-    create_table_query = (
-        f"CREATE TABLE IF NOT EXISTS {table_name} "
-        "(audio_name VARCHAR(100), audio_data LONGBLOB, audio_size INT, audio_duration FLOAT, audio_tags VARCHAR(100));"
-    )
+# def add_predefined_audios(table_name, directory):
+#     create_table_query = (
+#         f"CREATE TABLE IF NOT EXISTS {table_name} "
+#         "(audio_name VARCHAR(100), audio_data LONGBLOB, audio_size INT, audio_duration FLOAT, audio_tags VARCHAR(100));"
+#     )
 
-    cnx, cursor, count = connect_and_create_table(table_name, create_table_query)
+#     cnx, cursor, count = connect_and_create_table(table_name, create_table_query)
     
-    if count!=0 and count != len(os.listdir(directory)):
-        cursor.execute(f"DELETE FROM {table_name}")
-        count=0
+#     if count!=0 and count != len(os.listdir(directory)):
+#         cursor.execute(f"DELETE FROM {table_name}")
+#         count=0
 
-    if count == 0:  # If the table is empty, add data
-        def get_audio_metadata(file_path):
-            with sf.SoundFile(file_path) as audio_file:
-                metadata = {
-                    "audio_name": os.path.basename(file_path).split(".")[0],
-                    "duration": len(audio_file) / audio_file.samplerate,
-                    "channels": audio_file.channels,
-                    "samplerate": audio_file.samplerate,
-                    "format": audio_file.format,
-                    # Add more metadata fields as needed
-                }
-            return metadata
+#     if count == 0:  # If the table is empty, add data
+#         def get_audio_metadata(file_path):
+#             with sf.SoundFile(file_path) as audio_file:
+#                 metadata = {
+#                     "audio_name": os.path.basename(file_path).split(".")[0],
+#                     "duration": len(audio_file) / audio_file.samplerate,
+#                     "channels": audio_file.channels,
+#                     "samplerate": audio_file.samplerate,
+#                     "format": audio_file.format,
+#                     # Add more metadata fields as needed
+#                 }
+#             return metadata
         
-        for filename in os.listdir(directory):
-            file_path = os.path.join(directory, filename)
-            metadata = get_audio_metadata(file_path)
+#         for filename in os.listdir(directory):
+#             file_path = os.path.join(directory, filename)
+#             metadata = get_audio_metadata(file_path)
 
-            insert = f"INSERT INTO {table_name} (audio_name, audio_data, audio_size, audio_duration, audio_tags) VALUES ('{metadata['audio_name']}', %s, {os.path.getsize(file_path)}, {metadata['duration']}, 'predefined')"
+#             insert = f"INSERT INTO {table_name} (audio_name, audio_data, audio_size, audio_duration, audio_tags) VALUES ('{metadata['audio_name']}', %s, {os.path.getsize(file_path)}, {metadata['duration']}, 'predefined')"
             
-            cursor.execute(insert, (open(file_path, "rb").read(),))
+#             cursor.execute(insert, (open(file_path, "rb").read(),))
         
-        cnx.commit()   
+#         cnx.commit()   
         
-    # a,b,count = connect_and_create_table(table_name, create_table_query) 
+#     # a,b,count = connect_and_create_table(table_name, create_table_query) 
 
-    # print(count)
-    #cnx.close()
-
-
-def add_predefined_Transition_audio():
-    add_predefined_audios("AudioTracks", r"./pre_def/Transition audio")
+#     # print(count)
+#     #cnx.close()
 
 
-def add_predefined_audiotracks():
-    add_predefined_audios("Soundtracks", "./pre_def/Soundtracks")
+# def add_predefined_Transition_audio():
+#     add_predefined_audios("AudioTracks", r"./pre_def/Transition audio")
+
+
+# def add_predefined_audiotracks():
+#     add_predefined_audios("Soundtracks", "./pre_def/Soundtracks")
 
 
 #add_predefined_audiotracks()
@@ -192,7 +192,8 @@ def token_required(f):
                 return redirect(
                     url_for("login_page", error_msg="error_token_is_invalid")
                 )
-        except:
+        except Exception:
+            # print(e)
             # return jsonify({'message': 'token is invalid'})
             return redirect(url_for("login_page", error_msg="error_token_is_invalid"))
 
@@ -300,7 +301,7 @@ def save_image(current_user):
 
         try:
             cnx = connect_to_db()
-        except:
+        except Exception:
             return 400
 
         try:
@@ -590,7 +591,7 @@ def admin_page(current_user):
     cnx = connect_to_db()
 
     cursor = cnx.cursor()
-    cursor.execute(f"SELECT * FROM user_details")
+    cursor.execute("SELECT * FROM user_details")
     user_data = cursor.fetchall()
     #cnx.close()
     return render_template("admin.html", entries=user_data)
@@ -637,4 +638,4 @@ def login_user():
 
 if __name__ == "__main__":
     #print(os.environ["DATABASE_URL"])
-    app.run(debug=True, host="0.0.0.0")
+    app.run(debug=True)
