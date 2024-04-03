@@ -264,4 +264,9 @@ video {
     width: 5vw;
     font-size: 1vw;
     border-radius: 20px;
+    text-decoration: none;
+    background-color: #007bff;
+    color: aliceblue;
+    padding: 5px 10px;
+    margin: 2px;
 }
