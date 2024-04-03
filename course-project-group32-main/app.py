@@ -9,13 +9,15 @@ print("The program has been initialized")
 
 try:
     # from editor import create_audio_data
-    #import azure.functions as func
+    # import azure.functions as func
     # import tempfile
     import editor
+
     # from calendar import c
     # from sqlite3 import connect
     # from venv import create
     import moviepy.editor as mpe
+
     # import soundfile as sf
     # from numpy import insert
     from flask import (
@@ -44,15 +46,16 @@ except Exception as e:
     print(e)
     pass
 # except ImportError:
-    # print("Some Modules were missing\n Installing from requirements.txt..")
-    # os.system(r"pip install -r requirements.txt")
-    # print("Modules installed successfully") 
-    # print("Re-Running the program")
-    # os.system("python app.py")
-    # exit(1)
+# print("Some Modules were missing\n Installing from requirements.txt..")
+# os.system(r"pip install -r requirements.txt")
+# print("Modules installed successfully")
+# print("Re-Running the program")
+# os.system("python app.py")
+# exit(1)
 
-# os.system(r"clear")  
-          
+# os.system(r"clear")
+
+
 def create_user_table():
     create_table_command = """
     CREATE TABLE user_details (
@@ -63,7 +66,7 @@ def create_user_table():
         admin BOOLEAN NOT NULL,
         date_created DATE NOT NULL
     );"""
-    
+
     cnx = mysql.connector.connect(
         user="root",
         password="12345678",
@@ -73,17 +76,19 @@ def create_user_table():
     cursor = cnx.cursor()
     cursor.execute("CREATE DATABASE IF NOT EXISTS course_project")
     cursor.execute("USE course_project")
-    
+
     cursor.execute(create_table_command)
-    
+
     cnx.commit()
-    
+
     if cursor.rowcount == 0:
         return True
     else:
         return False
 
+
 pscon = psycopg2.connect(os.environ["DATABASE_URL"])
+
 
 def connect_to_db():
     return pscon
@@ -96,7 +101,8 @@ def add_predefined_images():
         "CREATE TABLE user_images (image_id varchar(256) AUTO_INCREMENT PRIMARY KEY, user_id varchar(256), image_type varchar(256), image_data BYTEA, image_width INT, image_height INT, image_size BIGINT, image_name VARCHAR(4096))"
     )
     cnx.commit()
-    
+
+
 def connect_and_create_table(table_name, create_table_query):
     cnx = connect_to_db()
     cursor = cnx.cursor()
@@ -110,6 +116,7 @@ def connect_and_create_table(table_name, create_table_query):
 
     return cnx, cursor, count
 
+
 # def add_predefined_audios(table_name, directory):
 #     create_table_query = (
 #         f"CREATE TABLE IF NOT EXISTS {table_name} "
@@ -117,7 +124,7 @@ def connect_and_create_table(table_name, create_table_query):
 #     )
 
 #     cnx, cursor, count = connect_and_create_table(table_name, create_table_query)
-    
+
 #     if count!=0 and count != len(os.listdir(directory)):
 #         cursor.execute(f"DELETE FROM {table_name}")
 #         count=0
@@ -134,18 +141,18 @@ def connect_and_create_table(table_name, create_table_query):
 #                     # Add more metadata fields as needed
 #                 }
 #             return metadata
-        
+
 #         for filename in os.listdir(directory):
 #             file_path = os.path.join(directory, filename)
 #             metadata = get_audio_metadata(file_path)
 
 #             insert = f"INSERT INTO {table_name} (audio_name, audio_data, audio_size, audio_duration, audio_tags) VALUES ('{metadata['audio_name']}', %s, {os.path.getsize(file_path)}, {metadata['duration']}, 'predefined')"
-            
+
 #             cursor.execute(insert, (open(file_path, "rb").read(),))
-        
-#         cnx.commit()   
-        
-#     # a,b,count = connect_and_create_table(table_name, create_table_query) 
+
+#         cnx.commit()
+
+#     # a,b,count = connect_and_create_table(table_name, create_table_query)
 
 #     # print(count)
 #     #cnx.close()
@@ -159,9 +166,9 @@ def connect_and_create_table(table_name, create_table_query):
 #     add_predefined_audios("Soundtracks", "./pre_def/Soundtracks")
 
 
-#add_predefined_audiotracks()
+# add_predefined_audiotracks()
 
-#add_predefined_Transition_audio()
+# add_predefined_Transition_audio()
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "78df64cc9984334d0ab38c8b8b5ff049"
@@ -238,13 +245,13 @@ def gallery_page(current_user):
         f"SELECT image_id, image_type, image_data FROM user_images WHERE user_id='{current_user['public_id']}'"
     )
     disp_images = cursor.fetchall()
-    #cnx.close()
+    # cnx.close()
     fin_image = []
     for img in disp_images:
         new_image = []
         new_image.append(img[0])
         new_image.append(img[1])
-        #print(f"image type {type(img[2])}")
+        # print(f"image type {type(img[2])}")
         new_image.append(base64.b64encode(img[2].tobytes()).decode("ascii"))
         fin_image.append(new_image)
     return render_template(
@@ -264,7 +271,7 @@ def save_image(current_user):
     image_upload_in_prog = True
     try:
         print("Called once")
-        
+
         file_data = request.files["file"]
         file_extension = request.form["extn"]
         file_type = request.form["file_type"]
@@ -273,7 +280,7 @@ def save_image(current_user):
         image_id = str(uuid.uuid4())
         file_copy = file_data
         file_data = file_data.read()
-        #file_data = base64.b64encode(file_data)
+        # file_data = base64.b64encode(file_data)
         iw = 0
         ih = 0
         file_copy_2 = file_copy
@@ -292,10 +299,10 @@ def save_image(current_user):
         ih = str(ih)
         size_b = str(size_b)
 
-        #file_data = file_data.decode("ascii")
+        # file_data = file_data.decode("ascii")
 
-        #in_query = f"INSERT INTO user_images (image_id, user_id, image_type, image_data, image_width, image_height, image_size, image_name) values ('{image_id}', '{user_id}', '{file_type}', '{file_data}', {iw}, {ih}, {size_b}, '{file_name}')"
-        
+        # in_query = f"INSERT INTO user_images (image_id, user_id, image_type, image_data, image_width, image_height, image_size, image_name) values ('{image_id}', '{user_id}', '{file_type}', '{file_data}', {iw}, {ih}, {size_b}, '{file_name}')"
+
         # print(in_query)
         # print(type(file_data))
 
@@ -305,15 +312,17 @@ def save_image(current_user):
             return 400
 
         try:
-            
             cursor = cnx.cursor()
             # cursor.execute(in_query, (image_id, user_id, file_type, file_data, iw, ih, size_b, file_name))
-            cursor.execute("insert into user_images (image_id, user_id, image_type, image_data, image_width, image_height, image_size, image_name) values (%s, %s, %s, %s, %s, %s, %s, %s)", (image_id, user_id, file_type, file_data, iw, ih, size_b, file_name))
+            cursor.execute(
+                "insert into user_images (image_id, user_id, image_type, image_data, image_width, image_height, image_size, image_name) values (%s, %s, %s, %s, %s, %s, %s, %s)",
+                (image_id, user_id, file_type, file_data, iw, ih, size_b, file_name),
+            )
             # print("executed")
             cnx.commit()
         except Exception as error:
             print(f"An exception occurred: {error}")
-            #cnx.close()
+            # cnx.close()
             image_upload_in_prog = False
             return 400
 
@@ -348,67 +357,76 @@ def editor_page(current_user):
 
     cursor = cnx.cursor()
     cursor.execute(
-        "SELECT image_id, image_type, image_data FROM user_images WHERE user_id=%s AND image_id IN %s", (current_user['public_id'], images_req)
+        "SELECT image_id, image_type, image_data FROM user_images WHERE user_id=%s AND image_id IN %s",
+        (current_user["public_id"], images_req),
     )
     disp_images = cursor.fetchall()
-    #cnx.close()
+    # cnx.close()
     fin_image = []
     for img in disp_images:
         new_image = []
         new_image.append(img[0])
         new_image.append(img[1])
-        #print(f"image type {type(img[2])}")
+        # print(f"image type {type(img[2])}")
         new_image.append(base64.b64encode(img[2].tobytes()).decode("ascii"))
         fin_image.append(new_image)
-    if(len(fin_image)<1):
+    if len(fin_image) < 1:
         return url_for("/gallery_page")
-    
-    # folder_path_s = r'pre_def'  
-    # folder_path_t = r'/pre_def/transition'  
-    
+
+    # folder_path_s = r'pre_def'
+    # folder_path_t = r'/pre_def/transition'
+
     # # Get the list of files in the folder
     # files_s = os.listdir(folder_path_s)
     # file_t = os.listdir(folder_path_t)
-    
+
     # data_s={}
     # data_t={}
-    
+
     cursor.execute("SELECT audio_name, audio_data, audio_duration FROM audiotracks")
     data_s = [list(v) for v in cursor.fetchall()]
     for i in range(len(data_s)):
         data_s[i][1] = base64.b64encode(data_s[i][1].tobytes()).decode("ascii")
     # print(data_s)
-    
+
     cursor.execute("SELECT audio_name, audio_data, audio_duration FROM soundtracks")
     data_t = [list(v) for v in cursor.fetchall()]
     for i in range(len(data_t)):
         data_t[i][1] = base64.b64encode(data_t[i][1].tobytes()).decode("ascii")
     # print(data_t)
-    
-    
+
     # data_t = [tuple([v[0], v[1][0], v[[1][2]]]) for k, v in data_t.items()]
     # for i in range(len(files_s)):
-        # data_s[i]={files_s[i], create_audio_data(folder_path_s+'/'+files_s[i])}
+    # data_s[i]={files_s[i], create_audio_data(folder_path_s+'/'+files_s[i])}
     # for i in range(len(file_t)):
     #     data_t[i]={file_t[i], create_audio_data(folder_path_t+'/'+file_t[i])}
-    
+
     curClip = editor.get_clip_from_id(fin_image[0][0], connect_to_db())
     for i in range(1, len(fin_image)):
-        curClip = editor.transition(curClip, editor.get_clip_from_id(fin_image[i][0], connect_to_db()), '')
-        #curClip = mpe.CompositeVideoClip([curClip, editor.get_clip_from_id(fin_image[i][0], connect_to_db())])
+        curClip = editor.transition(
+            curClip, editor.get_clip_from_id(fin_image[i][0], connect_to_db()), ""
+        )
+        # curClip = mpe.CompositeVideoClip([curClip, editor.get_clip_from_id(fin_image[i][0], connect_to_db())])
     file_n = current_user["public_id"]
-    #temp_dir = tempfile.gettempdir()
+    # temp_dir = tempfile.gettempdir()
     temp_dir = "static/fake_tmp"
     vid_path = f"{temp_dir}/{file_n}.mp4"
     curClip.write_videofile(vid_path, fps=30)
     vid_path = "/" + vid_path
-    return render_template("editor.html", image_list=fin_image, predef_audio_s=data_s, predef_audio_t=data_t, vid_src = vid_path)
+    return render_template(
+        "editor.html",
+        image_list=fin_image,
+        predef_audio_s=data_s,
+        predef_audio_t=data_t,
+        vid_src=vid_path,
+    )
 
-@app.route('/update_vid', methods=["POST"])
+
+@app.route("/update_vid", methods=["POST"])
 @token_required
 def update_vid(current_user):
     data = request.form
-    img_order =  json.loads(data["img_ord"])
+    img_order = json.loads(data["img_ord"])
     img_trans = json.loads(data["img_trs"])
     img_dur = json.loads(data["img_dur"])
     audio_ins = json.loads(data["aud_ins"])
@@ -417,47 +435,59 @@ def update_vid(current_user):
     res = 720
     fpss = 30
     th = res
-    tw = (16*res)//9
-    
-    curClip = editor.get_clip_from_id(img_order[0], connect_to_db(), img_dur[img_order[0]], th, tw)
+    tw = (16 * res) // 9
+
+    curClip = editor.get_clip_from_id(
+        img_order[0], connect_to_db(), img_dur[img_order[0]], th, tw
+    )
     for i in range(1, len(img_order)):
-        curTrans = ''
-        if img_order[i-1] in img_trans:
-            curTrans = img_trans[img_order[i-1]]
-        curClip = editor.transition(curClip, editor.get_clip_from_id(img_order[i], connect_to_db(), img_dur[img_order[i]], th, tw), curTrans)
+        curTrans = ""
+        if img_order[i - 1] in img_trans:
+            curTrans = img_trans[img_order[i - 1]]
+        curClip = editor.transition(
+            curClip,
+            editor.get_clip_from_id(
+                img_order[i], connect_to_db(), img_dur[img_order[i]], th, tw
+            ),
+            curTrans,
+        )
     finClip = curClip
-    if(len(audio_ins)>0):
+    if len(audio_ins) > 0:
         aud_clips = []
         for i in range(len(audio_ins)):
-            aud_clips.append(editor.get_audio_from_name(audio_ins[i], pscon, audio_ls[i]))
+            aud_clips.append(
+                editor.get_audio_from_name(audio_ins[i], pscon, audio_ls[i])
+            )
         finAud = editor.conc_aud(aud_clips)
-        duration=curClip.duration
-        temp_audio_clip=finAud.set_duration(duration)
-        final_audio_clip=mpe.CompositeAudioClip([temp_audio_clip])
+        duration = curClip.duration
+        temp_audio_clip = finAud.set_duration(duration)
+        final_audio_clip = mpe.CompositeAudioClip([temp_audio_clip])
 
-        finClip=curClip.set_audio(final_audio_clip)
+        finClip = curClip.set_audio(final_audio_clip)
 
     file_n = current_user["public_id"]
-    #temp_dir = tempfile.gettempdir()
+    # temp_dir = tempfile.gettempdir()
     temp_dir = "static/fake_tmp"
     vid_path = f"{temp_dir}/{file_n}.mp4"
     finClip.write_videofile(vid_path, fps=fpss)
     return "success", 200
 
+
 @app.route("/export")
 @token_required
 def export_pg(current_user):
     file_n = current_user["public_id"]
-    #temp_dir = tempfile.gettempdir()
+    # temp_dir = tempfile.gettempdir()
     temp_dir = "static/fake_tmp"
     vid_path = f"{temp_dir}/{file_n}.mp4"
-    return render_template("export.html", video_path = "/" + vid_path)
+    return render_template("export.html", video_path="/" + vid_path)
 
-@app.route("/export_vid", methods=['POST'])
+
+@app.route("/export_vid", methods=["POST"])
 @token_required
 def exp_vid(current_user):
     data = request.form
-    img_order =  json.loads(request.cookies.get("img_ord"))
+    img_order = json.loads(request.cookies.get("img_ord"))
     img_trans = json.loads(request.cookies.get("img_trs"))
     img_dur = json.loads(request.cookies.get("img_dur"))
     audio_ins = json.loads(request.cookies.get("aud_ins"))
@@ -467,32 +497,43 @@ def exp_vid(current_user):
     fpss = int(data["fps"])
 
     th = res
-    tw = (16*res)//9
-    
-    curClip = editor.get_clip_from_id(img_order[0], connect_to_db(), img_dur[img_order[0]], th, tw)
+    tw = (16 * res) // 9
+
+    curClip = editor.get_clip_from_id(
+        img_order[0], connect_to_db(), img_dur[img_order[0]], th, tw
+    )
     for i in range(1, len(img_order)):
-        curTrans = ''
-        if img_order[i-1] in img_trans:
-            curTrans = img_trans[img_order[i-1]]
-        curClip = editor.transition(curClip, editor.get_clip_from_id(img_order[i], connect_to_db(), img_dur[img_order[i]], th, tw), curTrans)
+        curTrans = ""
+        if img_order[i - 1] in img_trans:
+            curTrans = img_trans[img_order[i - 1]]
+        curClip = editor.transition(
+            curClip,
+            editor.get_clip_from_id(
+                img_order[i], connect_to_db(), img_dur[img_order[i]], th, tw
+            ),
+            curTrans,
+        )
     finClip = curClip
-    if(len(audio_ins)>0):
+    if len(audio_ins) > 0:
         aud_clips = []
         for i in range(len(audio_ins)):
-            aud_clips.append(editor.get_audio_from_name(audio_ins[i], pscon, audio_ls[i]))
+            aud_clips.append(
+                editor.get_audio_from_name(audio_ins[i], pscon, audio_ls[i])
+            )
         finAud = editor.conc_aud(aud_clips)
-        duration=curClip.duration
-        temp_audio_clip=finAud.set_duration(duration)
-        final_audio_clip=mpe.CompositeAudioClip([temp_audio_clip])
+        duration = curClip.duration
+        temp_audio_clip = finAud.set_duration(duration)
+        final_audio_clip = mpe.CompositeAudioClip([temp_audio_clip])
 
-        finClip=curClip.set_audio(final_audio_clip)
+        finClip = curClip.set_audio(final_audio_clip)
 
     file_n = current_user["public_id"]
-    #temp_dir = tempfile.gettempdir()
+    # temp_dir = tempfile.gettempdir()
     temp_dir = "static/fake_tmp"
     vid_path = f"{temp_dir}/{file_n}.mp4"
     finClip.write_videofile(vid_path, fps=fpss)
     return "success", 200
+
 
 @app.route("/register_request", methods=["POST"])
 def signup_user():
@@ -511,10 +552,10 @@ def signup_user():
     cursor.execute(f"SELECT email FROM user_details WHERE email='{data['email']}'")
 
     if len(cursor.fetchall()) > 0:
-        #cnx.close()
+        # cnx.close()
         return "Failed. Email is already in use."
 
-    #cnx.close()
+    # cnx.close()
 
     hashed_password = generate_password_hash(data["password"])
     public_id = str(uuid.uuid4())
@@ -530,7 +571,7 @@ def signup_user():
 
     cnx.commit()
 
-    #cnx.close()
+    # cnx.close()
 
     return redirect(url_for("login_page", error_msg="registered_successfully"))
 
@@ -555,7 +596,7 @@ def delete_image(current_user):
         f"DELETE FROM user_images WHERE image_id='{image_id}' AND user_id='{user_id}'"
     )
     cnx.commit()
-    #cnx.close()
+    # cnx.close()
     return "success", 200
 
 
@@ -568,7 +609,7 @@ def get_user_by_public_id(public_id):
 
     user = cursor.fetchone()
     if user:
-        #cnx.close()
+        # cnx.close()
         return {
             "public_id": user[0],
             "name": user[1],
@@ -578,7 +619,7 @@ def get_user_by_public_id(public_id):
             "date": user[5],
         }
     else:
-        #cnx.close()
+        # cnx.close()
         return None
 
 
@@ -592,7 +633,7 @@ def admin_page(current_user):
     cursor = cnx.cursor()
     cursor.execute("SELECT * FROM user_details")
     user_data = cursor.fetchall()
-    #cnx.close()
+    # cnx.close()
     return render_template("admin.html", entries=user_data)
 
 
@@ -610,7 +651,7 @@ def login_user():
     cursor.execute(f"SELECT * FROM user_details WHERE email='{auth['email']}'")
     user = cursor.fetchone()
 
-    #cnx.close()
+    # cnx.close()
 
     if user and check_password_hash(user[3], auth["password"]):
         token = jwt.encode(
@@ -621,7 +662,7 @@ def login_user():
             app.config["SECRET_KEY"],
             "HS256",
         )
-        if(user[4]==1):
+        if user[4] == 1:
             resp = make_response(redirect("/admin"))
         else:
             resp = make_response(redirect("/gallery"))
@@ -636,5 +677,5 @@ def login_user():
 
 
 if __name__ == "__main__":
-    #print(os.environ["DATABASE_URL"])
+    # print(os.environ["DATABASE_URL"])
     app.run(debug=True, host="0.0.0.0")
