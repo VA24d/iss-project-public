@@ -540,7 +540,7 @@ function selectTransition(action) {
             var selectedOption = this.value;
             console.log("selected option here--v");
             console.log(selectedOption);
-            action = action + "--" + selectedOption;
+            transitionType = action + "--" + selectedOption;
             console.log(action);
             transitionType = action;
             // You can perform further actions here based on the selected option

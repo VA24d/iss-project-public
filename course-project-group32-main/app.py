@@ -309,6 +309,7 @@ def save_image(current_user):
         try:
             cnx = connect_to_db()
         except Exception:
+            print("error in cnx")
             return 400
 
         try:
