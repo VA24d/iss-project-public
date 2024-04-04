@@ -651,14 +651,14 @@ function updateVid() {
         if (xhr.readyState == 4) {
             console.log("vid done!");
             let old_src = document.getElementById("current_vid").children[0].getAttribute('src');
-            console.log(old_src);
-            document.getElementById("current_vid").children[0].setAttribute('src', '');
+            // console.log(old_src);
+            // document.getElementById("current_vid").children[0].setAttribute('src', '');
+            // document.getElementById("current_vid").load();
+            // //document.getElementById("current_vid").play();
+            // console.log(document.getElementById("current_vid").children[0].getAttribute('src'));
+            // document.getElementById("current_vid").children[0].setAttribute('src', old_src);
             document.getElementById("current_vid").load();
-            //document.getElementById("current_vid").play();
-            console.log(document.getElementById("current_vid").children[0].getAttribute('src'));
-            document.getElementById("current_vid").children[0].setAttribute('src', old_src);
-            document.getElementById("current_vid").load();
-            // document.getElementById("current_vid").play()
+            document.getElementById("current_vid").play()
         }
     })
 
